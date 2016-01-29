@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Install Leiningen
+  hosts: lifeinlights
+  tasks:
+    - name: Get Leiningen script
+      get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/usr/local/bin/lein mode=0755
+      sudo: yes
+    - name: Execute lein script
+      shell: lein

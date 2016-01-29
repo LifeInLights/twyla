@@ -1,0 +1,7 @@
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile LXDE
+# Turn off screen saver
+#@xscreensaver -no-splash
+@set s off
+@xset -dpms
+@xset s noblank
