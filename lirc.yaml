@@ -1,0 +1,18 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Install LIRC
+  hosts: lifeinlights
+  tasks:
+    - name: Install LIRC
+      apt: name=lirc update_cache=yes
+      sudo: yes
+    - name: Replace hardware.conf with updated file
+      copy: src=files/hardware.conf dest=/etc/lirc/hardware.conf mode=0644
+      sudo: yes
+    - name: Replace lircd.conf with updated file
+      copy: src=files/lircd.conf dest=/etc/lirc/lircd.conf mode=0644
+      sudo: yes
+    - name: Restart LIRC service
+      service: name=lirc state=restarted
+      sudo: yes
+      

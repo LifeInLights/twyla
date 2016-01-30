@@ -5,3 +5,5 @@
 @set s off
 @xset -dpms
 @xset s noblank
+# Turn off the mouse.  Unclutter needs to be installed
+@unclutter -idle 0.1 -root
