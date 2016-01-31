@@ -1,0 +1,43 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Setup Pi for Life In Lights
+  hosts: lifeinlights
+  tasks:
+    - name: Get Leiningen script
+      get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/usr/local/bin/lein mode=0755
+      sudo: yes
+    - name: Execute lein script to install dependencies
+      shell: lein
+      
+    - name: Install LIRC package
+      apt: name=lirc update_cache=yes
+      sudo: yes
+    - name: Replace /etc/lirc/hardware.conf with updated file
+      copy: src=files/hardware.conf dest=/etc/lirc/hardware.conf mode=0644
+      sudo: yes
+    - name: Replace /etc/lirc/lircd.conf with updated file
+      copy: src=files/lircd.conf dest=/etc/lirc/lircd.conf mode=0644
+      sudo: yes
+    - name: Restart LIRC service
+      service: name=lirc state=restarted
+      sudo: yes
+      
+    - name: Install unclutter package
+      apt: name=unclutter update_cache=yes
+      sudo: yes
+      
+    - name: Disable boot features
+      copy: src=files/config.txt dest=/boot/config.txt mode=0644
+      sudo: yes
+      
+    - name: Install new autostart
+      copy: src=files/autostart dest=/etc/xdg/lxsession/LXDE/autostart mode=0644
+      sudo: yes
+      
+    - name: Install new lightdm.conf
+      copy: src=files/lightdm.conf dest=/etc/lightdm/lightdm.conf mode=0644
+      sudo: yes      
+
+    - name: Set timezone
+      command: /usr/bin/timedatectl set-timezone EST5EDT
+      sudo: yes
