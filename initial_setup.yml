@@ -3,7 +3,7 @@
 - name: Setup Pi for Life In Lights
   hosts: lifeinlights
   tasks:
-    - name: Get Leiningen script
+    - name: Install Leiningen script
       get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/usr/local/bin/lein mode=0755
       sudo: yes
     - name: Execute lein script to install dependencies
@@ -12,10 +12,10 @@
     - name: Install LIRC package
       apt: name=lirc update_cache=yes
       sudo: yes
-    - name: Replace /etc/lirc/hardware.conf with updated file
+    - name: Install custom /etc/lirc/hardware.conf (Enable LIRC)
       copy: src=files/hardware.conf dest=/etc/lirc/hardware.conf mode=0644
       sudo: yes
-    - name: Replace /etc/lirc/lircd.conf with updated file
+    - name: Install custom /etc/lirc/lircd.conf (Define remote codes)
       copy: src=files/lircd.conf dest=/etc/lirc/lircd.conf mode=0644
       sudo: yes
     - name: Restart LIRC service
@@ -26,15 +26,15 @@
       apt: name=unclutter update_cache=yes
       sudo: yes
       
-    - name: Disable boot features
+    - name: Install custom boot configurations (LIRC GPIO, Splash, Camera LED)
       copy: src=files/config.txt dest=/boot/config.txt mode=0644
       sudo: yes
       
-    - name: Install new autostart
+    - name: Install custom autostart (Mouse and Screensaver settings)
       copy: src=files/autostart dest=/etc/xdg/lxsession/LXDE/autostart mode=0644
       sudo: yes
       
-    - name: Install new lightdm.conf
+    - name: Install custom lightdm.conf (Screen blanking settings)
       copy: src=files/lightdm.conf dest=/etc/lightdm/lightdm.conf mode=0644
       sudo: yes      
 
