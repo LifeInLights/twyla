@@ -1,0 +1,13 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Disable screen blank
+  hosts: lifeinlights
+  tasks:
+    - name: Install new autostart
+      copy: src=files/autostart dest=/etc/xdg/lxsession/LXDE/autostart mode=0644
+      sudo: yes
+
+    - name: Install new lightdm.conf
+      copy: src=files/lightdm.conf dest=/etc/lightdm/lightdm.conf mode=0644
+      sudo: yes
+      
