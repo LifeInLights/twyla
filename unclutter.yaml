@@ -1,8 +1,0 @@
-#!/usr/bin/env ansible-playbook
-
-- name: Install unclutter
-  hosts: lifeinlights
-  tasks:
-    - name: Install uncluter
-      apt: name=unclutter update_cache=yes
-      sudo: yes

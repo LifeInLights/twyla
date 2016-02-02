@@ -1,8 +1,0 @@
-#!/usr/bin/env ansible-playbook
-
-- name: Update boot configuration to disable features
-  hosts: lifeinlights
-  tasks:
-    - name: Disable boot features
-      copy: src=files/config.txt dest=/boot/config.txt mode=0644
-      sudo: yes
