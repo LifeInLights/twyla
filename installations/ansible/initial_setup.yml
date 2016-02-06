@@ -1,14 +1,14 @@
 #!/usr/bin/env ansible-playbook
 
 - name: Setup Pi for Life In Lights
-  hosts: lifeinlights
+  hosts: all
   tasks:
     - name: Install Leiningen script
       get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/usr/local/bin/lein mode=0755
       sudo: yes
     - name: Execute lein script to install dependencies
       shell: lein
-      
+
     - name: Install LIRC package
       apt: name=lirc update_cache=yes
       sudo: yes
@@ -41,3 +41,10 @@
     - name: Set timezone
       command: /usr/bin/timedatectl set-timezone EST5EDT
       sudo: yes
+
+    - name: Install custom wallpapers
+      copy: src=files/wallpapers dest=/home/pi
+
+    - name: Set custom wallpaper
+      lineinfile: dest=/home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf  regexp=^wallpaper= line=wallpaper=/home/pi/wallpapers/lifeinlights-wallpaper-1280-720.png
+
