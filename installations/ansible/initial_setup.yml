@@ -1,7 +1,7 @@
 #!/usr/bin/env ansible-playbook
 
-- name: Setup Pi for Life In Lights
-  hosts: all
+- name: Setup Pi for art installation hardware used in Life In Lights
+  hosts: installations
   tasks:
     - name: Install Leiningen script
       get_url: url=https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein dest=/usr/local/bin/lein mode=0755
