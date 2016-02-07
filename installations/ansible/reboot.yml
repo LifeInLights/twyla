@@ -1,8 +1,8 @@
 #!/usr/bin/env ansible-playbook
 
 #https://support.ansible.com/hc/en-us/articles/201958037-Reboot-a-server-and-wait-for-it-to-come-back
-- name: Reboot Pis
-  hosts: lifeinlights
+- name: Reboot art installation hardware used in Life In Lights
+  hosts: installations
   tasks:
     - name: restart machine
       shell: sleep 2 && shutdown -r now "Ansible updates triggered"
