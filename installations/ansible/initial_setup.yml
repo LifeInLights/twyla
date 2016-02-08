@@ -13,8 +13,14 @@
     - name: Install custom /etc/lirc/hardware.conf (Enable LIRC)
       copy: src=files/hardware.conf dest=/etc/lirc/hardware.conf mode=0644
       sudo: yes
+    - name: Install custom /etc/modules (Enable dev and gpio)
+      copy: src=files/modules dest=/etc/modules mode=0644
+      sudo: yes
     - name: Install custom /etc/lirc/lircd.conf (Define remote codes)
       copy: src=files/lircd.conf dest=/etc/lirc/lircd.conf mode=0644
+      sudo: yes
+    - name: Install custom /home/pi/lircd.conf (Define remote codes)
+      copy: src=files/lircd.conf dest=/home/pi/lircd.conf
       sudo: yes
     - name: Restart LIRC service
       service: name=lirc state=restarted
@@ -46,3 +52,12 @@
     - name: Set custom wallpaper
       lineinfile: dest=/home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf  regexp=^wallpaper= line=wallpaper=/home/pi/wallpapers/lifeinlights-wallpaper-1280-720.png
 
+    - name: Check out sketch repository
+      git: repo=https://github.com/LifeInLights/twyla-opus.git dest=/home/pi/twyla-opus
+
+    - name: Set up crontab schedule
+      copy: src=files/crontab dest=/var/spool/cron/crontabs/pi
+      sudo: yes      
+    - name: Restart cron service
+      service: name=cron state=restarted
+      sudo: yes
