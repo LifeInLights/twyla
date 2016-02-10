@@ -2,7 +2,7 @@
 
 0 17 * * * irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER
 
-1 17 * * * cd /home/pi/twyla-opus/spectacles && export DISPLAY=:0 && /usr/local/bin/lein run -m spectacles.presenter cmd >> /home/pi/presentation.log 2>&1
+1 17 * * * cd /home/pi/twyla-opus/spectacles && export DISPLAY=:0 && /usr/local/bin/lein run -m spectacles.presenter >> /home/pi/presentation.log 2>&1
 
 30 21 * * * irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER && sleep 3 && irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER
 
