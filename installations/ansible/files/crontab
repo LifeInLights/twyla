@@ -7,3 +7,4 @@
 30 21 * * * irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER && sleep 3 && irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER
 
 31 21 * * * pkill -f "java.*lein"
+
