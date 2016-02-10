@@ -6,3 +6,6 @@
     - name: Checkout/Update Twyla-Opus repository
       git: repo=https://github.com/LifeInLights/twyla-opus.git dest=/home/pi/twyla-opus
       
+    - name: Execute lein script to install dependencies
+      command: lein deps chdir=/home/pi/twyla-opus/spectacles
+      
