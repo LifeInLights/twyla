@@ -1,0 +1,4 @@
+# development inventories for ansible
+installations/ansible/dev
+installations/ansible/testing
+
