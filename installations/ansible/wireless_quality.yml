@@ -1,0 +1,12 @@
+#!/usr/bin/env ansible-playbook
+- name: Get wireless link quality
+  hosts: installations
+  gather_facts: no
+  tasks:
+    - name: execute iwconfig
+      shell: /sbin/iwconfig wlan0 | /bin/grep "Link Quality"
+      register: iwconfig
+
+    - name: "Link Quality" 
+      debug: var=iwconfig.stdout
+             msg="{{ iwconfig.stdout|trim() }}"      
