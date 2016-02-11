@@ -1,0 +1,7 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Check out twyla-opus for art installation hardware used in Life In Lights
+  hosts: installations
+  tasks:
+    - name: Check out sketch repository
+      git: repo=https://github.com/LifeInLights/twyla-opus.git dest=/home/pi/twyla-opus

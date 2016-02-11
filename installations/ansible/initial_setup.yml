@@ -52,7 +52,6 @@
     - name: Set custom wallpaper
       lineinfile: dest=/home/pi/.config/pcmanfm/LXDE-pi/desktop-items-0.conf  regexp=^wallpaper= line=wallpaper=/home/pi/wallpapers/lifeinlights-wallpaper-1280-720.png
 
-    - name: Check out sketch repository
-      git: repo=https://github.com/LifeInLights/twyla-opus.git dest=/home/pi/twyla-opus
+    - include: check_out_twyla_opus.yml
 
     - include: setup_cron_schedule.yml
