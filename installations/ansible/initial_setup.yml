@@ -55,9 +55,4 @@
     - name: Check out sketch repository
       git: repo=https://github.com/LifeInLights/twyla-opus.git dest=/home/pi/twyla-opus
 
-    - name: Install up crontab schedule
-      copy: src=files/crontab dest=/var/spool/cron/crontabs/pi
-      sudo: yes      
-    - name: Restart cron service
-      service: name=cron state=restarted
-      sudo: yes
+    - include: setup_cron_schedule.yml
