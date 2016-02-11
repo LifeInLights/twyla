@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Setup Pi scheduling for art installation hardware used in Life In Lights
+  hosts: installations
+  tasks:
+    - cron: name="Update twyla-opus" minute="50" hour="16" job="cd /home/pi/twyla-opus && git pull"
+    - cron: name="Turn on projector" minute="0" hour="17" job="irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER"
+    - cron: name="Start presentation" minute="1" hour="17" job="cd /home/pi/twyla-opus/spectacles && export DISPLAY=:0 && /usr/local/bin/lein run -m spectacles.presenter >> /home/pi/presentation.log 2>&1"
+    - cron: name="Shut off projector" minute="30" hour="21" job="irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER && sleep 3 && irsend SEND_ONCE /home/pi/lircd.conf KEY_POWER"
+    - cron: name="Shut off presentation" minute="31" hour="21" job='pkill -f "java.*lein"'
